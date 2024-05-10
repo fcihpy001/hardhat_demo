@@ -1,0 +1,29 @@
+{
+  "name": "hardhat-project",
+  "version": "1.0.0",
+  "description": "hardhat demo",
+  "main": "index.js",
+  "author": {
+    "email": "fcihpy@gmail.com",
+    "name": "fcihpy"
+  },
+  "license": "MIT",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-foundry": "^1.1.1",
+    "@nomicfoundation/hardhat-ignition-ethers": "^0.15.3",
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "@openzeppelin/contracts": "^5.0.2",
+    "@openzeppelin/hardhat-upgrades": "^3.1.0",
+    "@types/mocha": "^10.0.6",
+    "hardhat": "^2.22.3",
+    "hardhat-gas-reporter": "^2.1.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  }
+}
