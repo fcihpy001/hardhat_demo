@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test wallet</title>
+    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"
+        type="application/javascript"></script>
+</head>
+<body>
+    <div>
+        <h1>wallet connect</h1>
+        <button onclick="connect()">连接钱包</button>
+        <p id="walletAddress"></p>
+        <label for="amount">Transfer Amount</label>
+        <input type="number" id="amount" name="amount">
+        <br>
+        <button onclick="transfer()">转账</button>
+    </div>
+    
+    <script>
+        async function connect() {
+            if (window.ethereum) {
+                try {
+                    await window.ethereum.request({method: 'eth_requestAccounts'});
+                    const accounts = await window.ethereum.request({method: 'eth_accounts'})
+                    const walletElement = document.getElementById('walletAddress');
+                    walletElement.textContent = '钱包地址：' + accounts[0];
+                    
+
+                } catch (error) {
+                    console.log('error')
+                    alert("Faild to connect wallet")
+                }
+            } else {
+                alert('Please install metamask')
+            }
+        }
+
+        async function transfer() {
+            await window.ethereum.request({method: 'eth_requestAccounts'});
+            const accounts = await window.ethereum.request({method: 'eth_accounts'})
+            <!-- alert('Wallet connect, Address: ' + accounts[0]) -->
+
+            const contact_addr = '0xc70059d9220aF2DE2a1e0252a5b6257aBc276681';
+            
+    
+            var provider = new ethers.providers.JsonRpcProvider("https://bsc-testnet.publicnode.com");
+            let abi = ['function buy(uint256 amount) public','function totalBalance() public view returns (uint256)']
+           const signer = await provider.getSigner() 
+           console.log(signer)  
+           const usdtContract = new ethers.Contract(contact_addr,abi,provider)
+           const usdt_signer = usdtContract.connect(signer)
+           console.log(usdt_signer)
+
+            const balance = await usdt_signer.totalBalance()
+            ethers.utils.formatUnits(balance, 18)
+           console.log(balance)
+
+        }
+    </script>
+</body>
+</html>
